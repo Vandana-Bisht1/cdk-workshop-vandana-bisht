@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
-import { CdkWorkshopVandanaBishtStack } from '../lib/cdk-workshop-vandana-bisht-stack';
+import { WorkshopPipelineStack } from '../lib/pipeline-stack';
 
 const app = new cdk.App();
-new CdkWorkshopVandanaBishtStack(app, 'CdkWorkshopVandanaBishtStack');
+new WorkshopPipelineStack(app, 'CdkWorkshopPipelineStackVandana');
