@@ -10,7 +10,19 @@ jobs:
   build:
     executor: aws-executor
     steps:
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+          region: AWS_DEFAULT_REGION
       - checkout
+      - run:
+          name: "Install AWS CDK"
+          command: |
+            sudo npm install -g aws-cdk
+      - run:
+          name: "Verify CDK Installation"
+          command: |
+            cdk --version
       - run:
           name: "Build CDK App"
           command: |
@@ -20,6 +32,9 @@ jobs:
           name: "Test Cases"
           command: |
             npm test
+      - run:
+          name: "CDK Deploy"
+          command: account=${AWS_ACCOUNT_ID} region=${AWS_DEFAULT_REGION} npm run ci_deploy
 workflow:
   cdk-deployment:
     jobs:

@@ -3,4 +3,9 @@ import * as cdk from 'aws-cdk-lib';
 import { WorkshopPipelineStack } from '../lib/pipeline-stack';
 
 const app = new cdk.App();
-new WorkshopPipelineStack(app, 'CdkWorkshopPipelineStackVandana');
+new WorkshopPipelineStack(app, "CdkWorkshopPipelineStackVandana", {
+    env: {
+      account: process.env.account,
+      region: process.env.region,
+    },
+})
