@@ -35,6 +35,12 @@ jobs:
       - run:
           name: "CDK Deploy"
           command: account=${AWS_ACCOUNT_ID} region=${AWS_DEFAULT_REGION} npm run ci_deploy
+      - run:
+          name: "Push Changes and trigger Pipeline"
+          command: |
+            git config --global user.email ${USER_EMAIL}
+            git config --global user.name ${USER_NAME}
+            git push origin main
 workflow:
   cdk-deployment:
     jobs:
